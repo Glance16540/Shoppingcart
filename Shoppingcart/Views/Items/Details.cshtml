@@ -4,12 +4,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="color:#f5f5f5;">Details</h2>
 
 <div>
-    <h4>Item</h4>
+    <h4 style="color:#f5f5f5;">Item</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="font-size:medium;color:#f5f5f5;">
+        @if (User.IsInRole("Admin"))
+        {
+            
         <dt>
             @Html.DisplayNameFor(model => model.CreationDate)
         </dt>
@@ -25,7 +28,7 @@
         <dd>
             @Html.DisplayFor(model => model.UpdatedDate)
         </dd>
-
+        }
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -41,31 +44,46 @@
         <dd>
             @Html.DisplayFor(model => model.Price)
         </dd>
-
+        @if (User.IsInRole("Admin"))
+        {
         <dt>
             @Html.DisplayNameFor(model => model.MediaURL)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MediaURL)
+            <img src="@Url.Content( @Model.MediaURL)"/>
         </dd>
-
+        }
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.Raw(Model.Description)
         </dd>
-
+      
     </dl>
 </div>
 <p>
     @if (User.IsInRole("Admin"))
     {
-         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) 
-         @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+        @Html.ActionLink("Delete","Delete", new { id = Model.ID})
+
+    }
+    <div>
+    @Html.ActionLink("Back to List", "Index")
+     &nbsp;
+    @using (Html.BeginForm("Add", "CartItems", new { itemId = Model.ID }, FormMethod.Post, null))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" class="btn" value="Add To Cart!" style="color:#f5f5f5" />
+
     }
 
-   
+
+    </div>
+
+
+
 </p>

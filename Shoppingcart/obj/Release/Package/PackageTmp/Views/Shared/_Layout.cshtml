@@ -1,0 +1,317 @@
+﻿<DOCTYPE html>
+    <html>
+    <head>
+        <title>ECommerce App</title>
+        <meta charset="utf-8" />
+
+        <link href="~/Assets/Css/Mycustomstylesheet.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+    </head>
+    <body style="background-color:#0F1626;">
+
+        <!--Start of Sidebar Navagation Col-->
+        <nav id="navbar" style="width:270px; position:fixed;font-family:sans-serif;text-decoration:none; display:none">
+
+            <button style="margin-left:170px;font-size:30px;background-color:#0F1626;border:none;color:#FF533D"> <i class="fa fa-remove " onclick="closeddisplay()"></i></button>
+            <div class="container" style="padding:0px">
+                <div>
+                    <img src="~/Assets/Images/UP.jpg" style="width:100px; height:70px;" />
+                </div>
+                <br />
+            </div>
+            <div class="Mycustomnavitem">
+                <a href="#">CFW Series</a>
+                <a href="@Url.Action("Index","Items")">CFAW Series</a>
+
+                <div class="dropdown">
+                    <button class="dropbtn fa fa-caret-down" onclick="dropdownbtn()" style="font-size:26px">Collection</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#">2016</a>
+                        <a Href="#">2015</a>
+                        <a href="#">2014</a>
+                    </div>
+                </div>
+                <a href="#">Straps</a>
+                <a href="#">Parts</a>
+                <a href="#">Tools</a>
+                <a href="#">Accessories</a>
+            </div>
+            <br />
+
+            <div class="mycontactblock">
+                <a href="#footer"> Contact</a>
+            </div>
+            <br />
+            <div class="mycontactblock">
+            <button data-toggle="modal" data-target="#newsletter">Newsletter</button>
+            </div>
+            <br />
+            <div class="mycontactblock">
+                <a href="#">Subscribe</a>
+            </div>
+        </nav>
+        <!--End Of Navagation Bar-->
+        <div style="margin-left:100px">
+            <div class="row" style="margin-left: 20px; margin-right: 20px">
+                <h3>
+                    <button style="margin-left:160px;color:#FF533D;background-color:#0F1626;border:none;font-size:30px;"><i class="fa fa-bars" onclick="display()"></i></button>
+                    <button class="pull-right" style="background-color:#0F1626;border:none;color:#f5f5f5;font-size:26px;margin-right:20px;margin-top:3px"><i class="fa fa-search"></i></button>
+                    &nbsp;
+                    @if (Request.IsAuthenticated)
+                    {
+
+                        <button onclick="location.href= '@Url.Action("Index","cartitems")'" class="pull-right" style="background-color:#0F1626;color:#f5f5f5;border:none;font-size:30px;margin-right:30px"><i class="fa fa-shopping-cart">@ViewBag.CartItems.Count</i></button>
+
+                    }
+                    <span class="pull-right">@Html.Partial("_LoginPartial")</span>
+                </h3>
+            </div>
+            <div class="container">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active col-lg-12">
+                            
+                            <img src="~/Assets/Images/3.jpg" />
+                            <div class="headertext">
+                                <h2><strong>Welcome!</strong></h2>
+                                <p> See Our 2017 Collections</p>
+                                <button onclick="location.href='@Url.Action("Index", "Items")'">Shop New Items Here!</button>
+                            </div>
+                        </div>
+
+                        <div class="item col-lg-12" >
+
+                            <img src="~/Assets/Images/jonna-fransa-227556.jpg" style="height:650px;width:1200px;"/> 
+                            <div class="headertext">
+                                <h2 style="color:#FF533D"><strong>Learn More About Our Watches</strong></h2>
+                                <button onclick="location.href='@Url.Action("About", "Home")'">See Our Five Signs of Quality</button>
+                            </div>
+                            </div>
+
+                        <div class="item  col-lg-12">
+
+                            <img src="~/Assets/Images/malte-wingen-264446.jpg"  style="height:650px;width:1200px;"/>
+                            <div class="headertext">
+                                <h2 style="color:#FF533D;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"><strong>Each Watch Custom To You </strong></h2>
+                                <p style="color: #0F1626; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Our Watch Specialists Will Assist You Day and Night To Find The Right Fit For You</p>
+                        </div>
+                            </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                @*<div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <div>
+                            <img src="~/Assests/Images/3.jpg" class="img-responsive;" style="width:100%;height:85%; padding:30px;margin:0px;margin-left:0px" />
+                            <div class="headertext">
+                                <h2><strong>New Arrivals</strong></h2>
+                                <p>2017 Collections</p>
+                                <button onclick="location.href='@Url.Action("Index", "Items")'">Shop New Items Here!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+
+
+                @RenderBody()
+                <hr />
+                <!--beginning of info section at bottom-->
+                <div class="subscribebox">
+                    <h1>Subscribe</h1>
+                    <p>To get special offers and <span style="color:#FF533D">VIP</span> treatment</p>
+                    <input placeholder="Enter e-mail" />
+                    <button>Subscribe</button>
+                </div>
+
+                <div style="background-color:#F5F5F5;padding:50px;text-align:center;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="font-size:24px;margin-left:30px;">Contact</h3>
+                            <p style="font-size:15px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;margin-left:30px">Questions? Go ahead.</p>
+                            <input placeholder="Name" style="margin:8px;padding:8px;width:370px;" /><br />
+                            <input placeholder="Email" style="margin:8px;padding:8px;width:370px" /><br />
+                            <input placeholder="Subject" style="margin:8px;padding:8px;width:370px" /><br />
+                            <input placeholder="Message" style="margin:8px;padding:8px;width:370px" /><br />
+                            <div class="contacthoverblock" id="footer">
+                                <button style="margin-left:30px;width:60%;padding:7px;color:#f5f5f5;background-color:#FF533D; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Send</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="text-align:center;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                            <h3>About</h3>
+                            <div style="padding:10px;">
+                                <a href="@Url.Action("Index","Home")" style="color:black;"><u>About us</u></a><br />
+                            </div>
+                            <div style="padding:10px">
+                                <a href="#" style="color:black"><u>We're hiring</u></a><br />
+                            </div>
+                            <div style="padding:10px">
+                                <a href="#" style="color:black"><u>Support</u></a><br />
+                            </div>
+
+                            <div class="findstore" style="padding:10px">
+                                <button data-toggle="modal" data-target="#findstorepopup">Find Store </button>
+                                <div id="findstorepopup" class="modal fade" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" >
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-title">
+                                                <div class="modal-content">
+                                                    <i type="button" class="close fa fa-remove" data-dismiss="modal"></i>
+                                                    <h3>Find our nearest store!</h3>
+
+                                                    <div class="modal-header">
+                                                        Find us below!
+
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <input type="search" placeholder="Please enter your address or zipcode!" style="width:50%" />
+                                                    </div>
+                                                    <div>
+                                                        <button id="popupbutton" class="btn btn-danger" style="background-color:red;color:white;color;width:20%;border:none;">Find Store!</button>
+                                                    </div>
+
+                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1611.9431797179957!2d-80.07160914621419!3d36.09625813398204!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x64583b7d90957128!2sCoder+Foundry!5e0!3m2!1sen!2sus!4v1501269845541" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="padding:10px">
+                                <a href="#" style="color:black"><u>Shipment</u></a><br />
+                            </div>
+                            <div style="padding:10px">
+                                <a href="#" style="color:black"><u>Payment</u></a><br />
+                            </div>
+                            <div style="padding:10px">
+                                <a href="#" style="color:black"><u>Gift card</u></a><br />
+                            </div>
+                            <div style="padding:10px">
+                                <a href="#" style="color:black"><u>Return</u></a><br />
+                            </div>
+                            <div style="padding:10px">
+                                <a href="#" style="color:black"><u>Help</u></a><br />
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size:16px;text-align:left;">
+                            <h3>Store</h3>
+                            <p><i class="fa fa-fw fa-map-marker"></i>Company Name</p>
+                            <p><i class="fa fa-fw fa-phone"></i>0044123123</p>
+                            <p><i class="fa fa-fw fa-envelope"></i>ex@mail.com</p>
+
+                            <br />
+                            <h3>We Accept</h3>
+                            <p><i class="fa fa-fw fa-cc-amex"></i>Amex</p>
+                            <p><i class="fa fa-fw fa-credit-card"></i>Credit Card</p>
+                            <br />
+                            <div style="font-size:20px">
+                                <i class="fa fa-fw fa-facebook"></i> <i class="fa fa-fw fa-instagram"></i> <i class="fa fa-fw fa-snapchat"></i> <i class="fa fa-fw fa-pinterest"></i> <i class="fa fa-fw fa-twitter"></i> <i class="fa fa-fw fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Footer starts here-->
+                <footer style="background-color:#FF533D;color:#f5f5f5;padding:10px">
+                    <center>
+                        <div style="text-align:center">
+                            <p>Powered by <a href="https://www.coderfoundry.com">Coder Foundry</a></p><p>&copy; Copyright Coder Foundry</p>
+                        </div>
+                    </center>
+                </footer>
+                <div id="shoppingcartinven">You have 0 items in your shopping cart </div>
+                <!--end of footer section-->
+                <div id="newsletter" class="modal fade" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" style="margin-top:15%">
+                        <div class="modal-content" style="text-align:center;">
+                            <button type="button" class="close" data-dismiss="modal" style="color:black" aria-label="Close"><i class="fa fa-remove"></i></button>
+                            <div class="modal-title" style="font-size:medium;text-align:center;font-size:30px;">
+                                Newsletter!
+                            </div>
+                            <p>Signup to never miss a thing!</p>
+
+
+                            <div class="modal-body" style="text-align:center;">
+                                <input type="email" placeholder="Enter your email" style="text-align:center;" />
+                            </div>
+                            <div style="text-align:center;">
+                                <button class="btn btn-danger">subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+        @RenderSection("scripts", required: false)
+
+        <script>
+            function display() {
+                document.getElementById("navbar").style.display = "block";
+            }
+            function closeddisplay() {
+                document.getElementById("navbar").style.display = "none";
+
+
+            }
+            function shoppingcartitems() {
+                var x = document.getElementById("shoppingcartinven")
+                x.className = "show";
+                setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+            function dropdownbtn() {
+                document.getElementById("myDropdown").classList.toggle('show');
+
+            }
+
+            window.onclick = function (event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+
+                        }
+                    }
+                }
+            }
+
+
+
+        </script>
+
+
+
+
+    </body>
+</html>
+<!--end of webpage content-->
+
+
+

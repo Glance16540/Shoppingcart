@@ -11,7 +11,7 @@ using Shoppingcart.Models;
 namespace Shoppingcart.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : Universal
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

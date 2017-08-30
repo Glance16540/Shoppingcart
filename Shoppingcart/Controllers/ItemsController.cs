@@ -8,12 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using Shoppingcart.Models;
 using Shoppingcart.Models.CodeFirst;
+using System.IO;
 
 namespace Shoppingcart.Controllers
 {
-    public class ItemsController : Controller
+    public class ItemsController : Universal
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: Items
         public ActionResult Index()
@@ -49,10 +50,24 @@ namespace Shoppingcart.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "ID,CreationDate,UpdatedDate,Name,Price,MediaURL,Description")] Item item)
+        public ActionResult Create([Bind(Include = "ID,CreationDate,UpdatedDate,Name,Price,MediaURL,Description")] Item item, HttpPostedFileBase image)
         {
+            if(image != null && image.ContentLength > 0)
+            {
+                var ext = Path.GetExtension(image.FileName).ToLower();
+                if (ext != ".png" && ext != ".jpg" && ext != ".jpg" && ext != ".gif" && ext != ".bmp")
+                {
+                    ModelState.AddModelError("image", "Invalid Format.");
+                }
+
+            }
             if (ModelState.IsValid)
             {
+                var filePath = "/Assets/Images/";
+                var absPath = Server.MapPath("~" + filePath);
+                item.MediaURL = filePath + image.FileName;
+                image.SaveAs(Path.Combine(absPath, image.FileName));
+                item.CreationDate = System.DateTime.Now;
                 db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,11 +98,36 @@ namespace Shoppingcart.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "ID,CreationDate,UpdatedDate,Name,Price,MediaURL,Description")] Item item)
+        public ActionResult Edit([Bind(Include = "ID,CreationDate,UpdatedDate,Name,Price,MediaURL,Description")] Item item, string mediaURL, HttpPostedFileBase image)
         {
+            if (image != null && image.ContentLength > 0)
+            {
+                var ext = Path.GetExtension(image.FileName).ToLower();
+                if (ext != ".png" && ext != ".jpg" && ext != ".jpg" && ext != ".gif" && ext != ".bmp")
+                {
+                    ModelState.AddModelError("image", "Invalid Format.");
+                }
+
+            }
+
+
             if (ModelState.IsValid)
             {
+
+                if (image != null)
+
+                {
+                    var filePath = "/Assets/Images/"; //relative server path          
+                    var absPath = Server.MapPath("~" + filePath); // path on physicaldrive on server   
+                    item.MediaURL = filePath + image.FileName; // media url for relative path             
+                    image.SaveAs(Path.Combine(absPath, image.FileName)); //save image} 
+                }
+                else
+                {
+                    item.MediaURL = mediaURL;
+                }
                 db.Entry(item).State = EntityState.Modified;
+                item.UpdatedDate = System.DateTime.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -117,6 +157,8 @@ namespace Shoppingcart.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Item item = db.Items.Find(id);
+            var absPath = Server.MapPath("~" + item.MediaURL);
+            System.IO.File.Delete(absPath);
             db.Items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");

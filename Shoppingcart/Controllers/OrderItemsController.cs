@@ -8,118 +8,126 @@ using System.Web;
 using System.Web.Mvc;
 using Shoppingcart.Models;
 using Shoppingcart.Models.CodeFirst;
+using Microsoft.AspNet.Identity;
 
 namespace Shoppingcart.Controllers
 {
-    public class OrderItemsController : Controller
+    public class OrderItemsController : Universal
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        
 
-        // GET: OrderItems
-        public ActionResult Index()
-        {
-            return View(db.OrderItems.ToList());
-        }
+        //// GET: OrderItems
+        //public ActionResult Index()
+        //{
+        //    return View(db.OrderItems.ToList());
+        //}
 
-        // GET: OrderItems/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OrderItem orderItem = db.OrderItems.Find(id);
-            if (orderItem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(orderItem);
-        }
+        //// GET: OrderItems/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    OrderItem orderItem = db.OrderItems.Find(id);
+        //    if (orderItem == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(orderItem);
+        //}
 
-        // GET: OrderItems/Create
+        //// GET: OrderItems/Create
    
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: OrderItems/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,OrderId,ItemId,Quantity,UnitPrice")] OrderItem orderItem)
-        {
-            if (ModelState.IsValid)
-            {
-                db.OrderItems.Add(orderItem);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: OrderItems/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,OrderId,ItemId,Quantity,UnitPrice")] OrderItem orderItem)
+        //{
+        //    var user = db.Users.Find(User.Identity.GetUserId());
+        //    var Orders = db.Order.Where(c => c.CustomerId == user.Id).ToList();
+        //    if (ModelState.IsValid)
+        //    {
 
-            return View(orderItem);
-        }
+        //        orderItem.Quantity = Orders.Count;
+        //        orderItem.ID = orderItem.Order.ID;
+        //        //orderItem.OrderId = orderItem.Order. ;
+        //        //orderItem.UnitPrice = ;
+        //        db.OrderItems.Add(orderItem);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-        // GET: OrderItems/Edit/5
+        //    return View(orderItem);
+        //}
+
+        //// GET: OrderItems/Edit/5
       
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OrderItem orderItem = db.OrderItems.Find(id);
-            if (orderItem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(orderItem);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    OrderItem orderItem = db.OrderItems.Find(id);
+        //    if (orderItem == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(orderItem);
+        //}
 
-        // POST: OrderItems/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //// POST: OrderItems/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
    
-        public ActionResult Edit([Bind(Include = "ID,OrderId,ItemId,Quantity,UnitPrice")] OrderItem orderItem)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(orderItem).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(orderItem);
-        }
+        //public ActionResult Edit([Bind(Include = "ID,OrderId,ItemId,Quantity,UnitPrice")] OrderItem orderItem)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(orderItem).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(orderItem);
+        //}
 
-        // GET: OrderItems/Delete/5
+        //// GET: OrderItems/Delete/5
        
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OrderItem orderItem = db.OrderItems.Find(id);
-            if (orderItem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(orderItem);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    OrderItem orderItem = db.OrderItems.Find(id);
+        //    if (orderItem == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(orderItem);
+        //}
 
-        // POST: OrderItems/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //// POST: OrderItems/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
        
-        public ActionResult DeleteConfirmed(int id)
-        {
-            OrderItem orderItem = db.OrderItems.Find(id);
-            db.OrderItems.Remove(orderItem);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    OrderItem orderItem = db.OrderItems.Find(id);
+        //    db.OrderItems.Remove(orderItem);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

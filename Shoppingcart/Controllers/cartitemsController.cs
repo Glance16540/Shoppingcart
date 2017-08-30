@@ -8,17 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using Shoppingcart.Models;
 using Shoppingcart.Models.CodeFirst;
+using Microsoft.AspNet.Identity;
 
 namespace Shoppingcart.Controllers
 {
-    public class cartitemsController : Controller
+    [Authorize]
+    public class cartitemsController : Universal
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+
 
         // GET: cartitems
         public ActionResult Index()
         {
-            return View(db.Cartitem.ToList());
+            var user = db.Users.Find(User.Identity.GetUserId());
+            return View(user.Cartitem.ToList());
         }
 
         // GET: cartitems/Details/5
@@ -37,27 +40,51 @@ namespace Shoppingcart.Controllers
         }
 
         // GET: cartitems/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+
 
         // POST: cartitems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Itemid,Count,Creationdate,CustomerID")] cartitem cartitem)
+        public ActionResult Add(int? itemId)
         {
-            if (ModelState.IsValid)
+            if (itemId != null)
             {
-                db.Cartitem.Add(cartitem);
-                db.SaveChanges();
+                var user = db.Users.Find(User.Identity.GetUserId());
+                if (user == null)
+                {
+                    return RedirectToAction("Login","Account");
+                }
+                if (db.Cartitem.Where(c => c.CustomerID == user.Id).Any(c => c.Itemid == itemId))
+                {
+                    var existingItem = db.Cartitem.Where(c => c.CustomerID == user.Id).FirstOrDefault(c => c.Itemid == itemId);
+                    existingItem.Count += 1;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    cartitem cart = new cartitem();
+                    cart.Itemid = (int)itemId;
+                    cart.CustomerID = user.Id;
+                    cart.Count = 1;
+                    cart.Creationdate = DateTime.Now;
+                    db.Cartitem.Add(cart);
+                    db.SaveChanges();
+                }
+                
                 return RedirectToAction("Index");
             }
 
-            return View(cartitem);
+            return RedirectToAction("Index");
         }
+
+
 
         // GET: cartitems/Edit/5
         public ActionResult Edit(int? id)
@@ -83,6 +110,7 @@ namespace Shoppingcart.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.Entry(cartitem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

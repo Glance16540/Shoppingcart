@@ -13,7 +13,7 @@ using Shoppingcart.Models;
 namespace Shoppingcart.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : Universal
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

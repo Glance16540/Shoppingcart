@@ -19,8 +19,9 @@ namespace Shoppingcart.Models.CodeFirst
         public string CustomerId { get; set; }
         public bool Completed { get; set; }
 
-        //public virtual ApplicationUser Customer { get; set; }
-        //public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ApplicationUser Customer { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+    
 
     }
 }

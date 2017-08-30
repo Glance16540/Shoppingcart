@@ -1,18 +1,26 @@
 ﻿<!--end of sidebar Navagation col-->
 <!--beginning of images-->
 @model IEnumerable<Shoppingcart.Models.CodeFirst.Item>
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Create New", "Create")
+}
+>
 <div class="container">
+   
     <div class="row" style="text-align:center;margin-left:0px;margin-right:0px;">
         @foreach (var item in Model)
             {
             <div class="col-md-3">
-                <a href="@Url.Action("Details", new {id = item.ID })"><img src="@item.MediaURL" class="img-responsive" style="display:block;margin:auto" /></a>
-                <p style="margin-left:0px;"><strong>@item.Name</strong></p>
-                <p style="margin-left:0px;"><strong>$@item.Price</strong></p>
+                <a href="@Url.Action("Details","items" ,new {id = item.ID })"/>
+                <img src="@Url.Content(item.MediaURL)" class="img-responsive" style="display:block;margin:auto" />
+                <p style="margin-left:0px;color:#f5f5f5"><strong>@item.Name</strong></p>
+                <p style="margin-left:0px;color:#f5f5f5"><strong>$@item.Price.ToString()</strong></p>
                 @if (User.IsInRole("Admin"))
                 {
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID })
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+
                 }
 
             </div>
@@ -20,6 +28,7 @@
         }
     </div>
 </div>
+  
 @*<div class="col-md-3">
             <img src="~/Assests/Images/m2.jpg" class="img-responsive" style="display:block;margin:auto" />
             <p style="margin-left:0px;"><strong>CFW-1200</strong></p>

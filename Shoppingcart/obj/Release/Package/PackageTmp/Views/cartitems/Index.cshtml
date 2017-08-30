@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Shoppingcart.Models.CodeFirst.cartitem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:#f5f5f5" >Index</h2>
+
+<p >
+ <a href="@Url.Action("Index", "Items")"style="color:#f5f5f5">Click Here To Add Another Item!</a>
+</p>
+<table class="table">
+    <tr>
+        <th style="color:#f5f5f5">
+            Item
+        </th>
+        <th style="color:#f5f5f5">
+            @Html.DisplayNameFor(model => model.Count)
+        </th>
+        <th style="color:#f5f5f5">
+            @Html.DisplayNameFor(model => model.Creationdate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td style="color:#f5f5f5">
+                @Html.DisplayFor(modelItem => item.Item.Name)
+            </td>
+            <td style="color:#f5f5f5">
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td style="color:#f5f5f5">
+                @Html.DisplayFor(modelItem => item.Creationdate)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Items", new { id = item.Item.ID }, null) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+                @Html.ActionLink("Change Quanity", "Edit", new { id = item.ID })
+
+                
+            </td>
+
+        </tr>
+            
+    }
+    @Html.ActionLink("Proceed to Payment","Index","OrderItems",new { id = OrderItems.Item.ID})
+
+</table>

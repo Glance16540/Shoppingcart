@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="color:#f5f5f5">Details</h2>
 
 <div>
-    <h4>Order</h4>
+    <h4 style="color:#f5f5f5">Order</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -91,8 +91,53 @@
         </dd>
 
     </dl>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>
+                Item
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Unit Price
+            </th>
+            <th>
+                Unit Total
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>
+                    <img src="@item.Item.MediaURL" style="max-width: 100px"/>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @{ 
+                        var unitTotal = item.UnitPrice * item.Quantity;
+                    }
+                    @unitTotal
+                </td>
+                <td>
+                    <a href="@Url.Action("Details","Items", new { id = item.ItemId })">Details</a>
+                </td>
+            </tr>
+        }
+
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
