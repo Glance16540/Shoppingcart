@@ -24,7 +24,7 @@ namespace Shoppingcart.Models
 
 
                 ViewBag.CartItems = db.Cartitem.AsNoTracking().Where(c =>c.CustomerID == user.Id).ToList();
-                ViewBag.CartItemsCount = db.Cartitem.AsNoTracking().Where(c => c.CustomerID == user.Id).Sum(c => c.Count);
+                ViewBag.CartItemsCount = db.Cartitem.AsNoTracking().Where(c => c.CustomerID == user.Id).ToList().Sum(c => c.Count);
                 var myCart = db.Cartitem.AsNoTracking().Where(c => c.CustomerID == user.Id).ToList();
                 ViewBag.carttotal = myCart.Sum(a => a.UnitTotal);
             }

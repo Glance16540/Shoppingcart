@@ -20,9 +20,18 @@
         <th style="color:#f5f5f5">
             @Html.DisplayNameFor(model => model.Creationdate)
         </th>
+        <th style="color:#f5f5f5">
+        @Html.DisplayNameFor(model => model.Item.Price)
+        </th>
+        <th style="color:#f5f5f5">
+            @Html.DisplayNameFor(model => model.UnitTotal)
+        </th>
+        <th></th>
         <th></th>
     </tr>
 
+    @{decimal p = 0;}
+    
     @foreach (var item in Model)
     {
         <tr>
@@ -32,21 +41,47 @@
             </td>
             <td style="color:#f5f5f5">
                 @Html.DisplayFor(modelItem => item.Count)
+                @Html.ActionLink("Change Quanity", "Edit", new { id = item.ID })
             </td>
             <td style="color:#f5f5f5">
                 @Html.DisplayFor(modelItem => item.Creationdate)
             </td>
+            <td style="color:#f5f5f5">
+                @Html.DisplayFor(modelItem => item.Item.Price) 
+                @{p += item.Item.Price;}
+            </td>
+            <td style="color:#f5f5f5">
+                @Html.DisplayFor(modelItem =>item.UnitTotal)
+             
+            </td>
+            <td>
+                <img src="@Url.Content(item.Item.MediaURL)" />
+            </td>
             <td>
                 @Html.ActionLink("Details", "Details", "Items", new { id = item.Item.ID }, null) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
-                @Html.ActionLink("Change Quanity", "Edit", new { id = item.ID })
-
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) 
                 
             </td>
 
         </tr>
-            
+           
+       
     }
-    @Html.ActionLink("Proceed to Payment","Index","OrderItems",new { id = OrderItems.Item.ID})
+       
 
 </table>
+<div @*style="margin-left:50%"*@>
+    <hr />
+<h4 style="color:#f5f5f5">Total Price</h4>
+<p style="color:#f5f5f5;">$ @ViewBag.carttotal </p>
+</div>
+@if (ViewBag.carttotal > 0)
+{
+
+    <a href="@Url.Action("Create", "Orders")" style="color:#f5f5f5;font-size:medium;border:none;" class="btn btn-danger">Checkout Here!</a>
+}
+else
+{
+
+<a href="@Url.Action("Index", "Items")" style="color:#f5f5f5">Please Select a Item to buy!</a>
+    }

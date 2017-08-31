@@ -6,7 +6,7 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right"style="color:#f5f5f5;background-color:#FF533D;margin-right:60px;">
-        <li style="">
+        <li >
             @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
              <a href="@Url.Action("Index", "Manage")"style="color:#f5f5f5;">Welcome @ViewBag.FirstName!</a>
         </li>

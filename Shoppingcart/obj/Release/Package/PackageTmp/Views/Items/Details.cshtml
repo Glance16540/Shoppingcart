@@ -51,7 +51,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MediaURL)
+            <img src="@Url.Content( @Model.MediaURL)"/>
         </dd>
         }
         <dt>
@@ -61,7 +61,7 @@
         <dd>
             @Html.Raw(Model.Description)
         </dd>
-        
+      
     </dl>
 </div>
 <p>
@@ -77,7 +77,7 @@
     @using (Html.BeginForm("Add", "CartItems", new { itemId = Model.ID }, FormMethod.Post, null))
     {
         @Html.AntiForgeryToken()
-        <input type="submit" class="btn" value="Add To Cart!" style="color:#f5f5f5" />
+        <input type="submit" class="btn" value="Add To Cart!" style="color:#FF533D" />
 
     }
 
