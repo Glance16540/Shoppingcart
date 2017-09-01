@@ -15,13 +15,13 @@ namespace Shoppingcart.Controllers
     [Authorize]
     public class OrdersController : Universal
     {
-       
+        [Authorize]
         // GET: Orders
         public ActionResult Index()
         {
             return View(db.Order.ToList());
         }
-
+        [Authorize]
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,14 +36,14 @@ namespace Shoppingcart.Controllers
             }
             return View(order);
         }
-
+        [Authorize]
         // GET: Orders/Create
-        
+
         public ActionResult Create()
         {
             return View();
         }
-
+        [Authorize]
         // POST: Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

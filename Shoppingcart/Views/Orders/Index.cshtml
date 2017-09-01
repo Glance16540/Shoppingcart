@@ -43,7 +43,7 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr >
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
@@ -79,7 +79,7 @@
         </td>
         <td>
             
-           <a href="@Url.Action("Details", "Orders", new { id=item.ID })" style="color:#f5f5f5"> Cart Details</a> 
+           <a href="@Url.Action("Details", "Orders", new { id=item.ID })" class="btn btn-danger" > Cart Details</a> 
            
         </td>
     </tr>

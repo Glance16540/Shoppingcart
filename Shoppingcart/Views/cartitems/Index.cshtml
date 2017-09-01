@@ -41,7 +41,8 @@
             </td>
             <td style="color:#f5f5f5">
                 @Html.DisplayFor(modelItem => item.Count)
-                @Html.ActionLink("Change Quanity", "Edit", new { id = item.ID })
+                &nbsp;
+                <a href="@Url.Action("Edit", "cartitems", new { id = item.ID })" style="color:#FF533D">Change Quanity!</a>
             </td>
             <td style="color:#f5f5f5">
                 @Html.DisplayFor(modelItem => item.Creationdate)
@@ -58,8 +59,8 @@
                 <img src="@Url.Content(item.Item.MediaURL)" />
             </td>
             <td>
-           <a href="@Url.Action("Details", "Items", new { id = item.Item.ID }, null )" style="color:#f5f5f5"> Details</a> |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) 
+           <a href="@Url.Action("Details", "Items", new { id = item.Item.ID }, null )" class="btn btn-info"> Details</a> |
+             <a href="@Url.Action("Delete","cartitems")" class="btn btn-danger" > Delete</a>   
                 
             </td>
 

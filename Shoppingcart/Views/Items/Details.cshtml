@@ -79,13 +79,16 @@
         <input type="submit" class="btn btn-default" value="Add To Cart!"  />
 
         <a href="@Url.Action("Index","Items")" class="btn btn-default">Back To Inventory!</a>
-        if (ViewBag.carttotal > 0)
+        if ( User.Identity.IsAuthenticated)
         {
-
+            if (ViewBag.carttotal > 0)
+            {
             <a href="@Url.Action("Index", "cartitems")" class="btn btn-danger">Back To Your Cart!</a>
+            }
         }
         else
         {
+
             <a href="@Url.Action("Login", "Account")" class=" btn btn-info">Please Login Here To Start Shopping!</a>
         }
 
