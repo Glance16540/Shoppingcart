@@ -6,9 +6,7 @@
 
 <h2 style="color:#f5f5f5">Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table" style="color:#f5f5f5">
     <tr>
         <th>
@@ -77,12 +75,12 @@
             @Html.DisplayFor(modelItem => item.Completed)
         </td>
         <td>
-           <a href @Url.Action("Details","OrderItems", new {id = item.ID }) style="color:#f5f5f5">Click Here to see your Ordered Items!</a>
+           @*<a href @Url.Action("Details","OrderItems", new {id = item.ID }) style="color:#f5f5f5">Click Here to see your Ordered Items!</a>*@
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            
+           <a href="@Url.Action("Details", "Orders", new { id=item.ID })" style="color:#f5f5f5"> Cart Details</a> 
+           
         </td>
     </tr>
 }

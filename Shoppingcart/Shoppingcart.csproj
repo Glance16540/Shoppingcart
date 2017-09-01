@@ -360,7 +360,7 @@
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <None Include="Properties\PublishProfiles\glance-shopping - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\glance-shopping - Web Deploy.pubxml" />
-    <None Include="Views\Items\Index.cshtml" />
+    <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Assets\Images\3.jpg" />
     <Content Include="Assets\Images\m1.jpg" />
     <Content Include="Assets\Images\m2.jpg" />

@@ -72,8 +72,8 @@
 </table>
 <div @*style="margin-left:50%"*@>
     <hr />
-<h4 style="color:#f5f5f5">Total Price</h4>
-<p style="color:#f5f5f5;">$ @ViewBag.carttotal </p>
+<h3 style="color:#f5f5f5">Total Price</h3>
+<p style="color:#f5f5f5;font-size:23px;">$ @ViewBag.carttotal </p>
 </div>
 @if (ViewBag.carttotal > 0)
 {
@@ -83,5 +83,5 @@
 else
 {
 
-<a href="@Url.Action("Index", "Items")" style="color:#f5f5f5">Please Select a Item to buy!</a>
+<a href="@Url.Action("Index", "Items")" style="color:#f5f5f5;background-color:#FF533D" class="btn btn-default">Please Select a Item to buy!</a>
     }
