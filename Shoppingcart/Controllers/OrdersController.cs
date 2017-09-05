@@ -19,7 +19,9 @@ namespace Shoppingcart.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Order.ToList());
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var orders = db.Order.AsNoTracking().Where(c => c.CustomerId == user.Id).ToList();
+            return View(orders);
         }
         [Authorize]
         // GET: Orders/Details/5
